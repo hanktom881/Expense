@@ -1,10 +1,12 @@
 package com.tom.expense;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class MainActivity extends Activity {
@@ -17,8 +19,20 @@ public class MainActivity extends Activity {
     }
 
     public void add(View v){
-
+        EditText edDate = (EditText)findViewById(R.id.ed_date);
+        EditText edInfo = (EditText)findViewById(R.id.ed_info);
+        EditText edAmount = (EditText)findViewById(R.id.ed_amount);
+        String date = edDate.getText().toString();
+        String info = edInfo.getText().toString();
+        int amount = Integer.parseInt(edAmount.getText().toString());
+        //INSERT INTO expense(cdate, ctext, amount) VALUES('aaa', 'bbb', 123)
+        ContentValues values = new ContentValues();
+        values.put("cdate", date);
+        values.put("ctext", info);
+        values.put("amount", amount);
+        long id = dbHelper.getWritableDatabase().insert("expense", null, values);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
