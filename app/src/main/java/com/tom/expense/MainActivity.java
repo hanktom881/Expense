@@ -8,11 +8,12 @@ import android.view.View;
 
 
 public class MainActivity extends Activity {
-
+    DBHelper dbHelper = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new DBHelper(this, "expense.db", null, 1);
     }
 
     public void add(View v){
