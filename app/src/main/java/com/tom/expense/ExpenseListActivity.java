@@ -20,10 +20,10 @@ public class ExpenseListActivity extends Activity {
         dbHelper = new DBHelper(this, "expense.db", null, 1);
         Cursor c = dbHelper.getReadableDatabase()
                 .query("expense", null, null, null, null, null, null);
-        String[] from = {"ctext", "amount"};
-        int[] to = {android.R.id.text1, android.R.id.text2};
+        String[] from = {"cdate", "ctext", "amount"};
+        int[] to = {R.id.row_cdate, R.id.row_info, R.id.row_amount};
         SimpleCursorAdapter adapter = new
-                SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, c, from, to, 1);
+                SimpleCursorAdapter(this, R.layout.list_row, c, from, to, 1);
         /*while(c.moveToNext()){
             int id = c.getInt(c.getColumnIndex("_id"));
             String cdate = c.getString(c.getColumnIndex("cdate"));
