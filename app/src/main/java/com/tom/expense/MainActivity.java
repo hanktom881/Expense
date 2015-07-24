@@ -2,10 +2,12 @@ package com.tom.expense;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 
@@ -18,8 +20,18 @@ public class MainActivity extends Activity {
         dbHelper = new DBHelper(this, "expense.db", null, 1);
     }
 
+    public void list(View v){
+        Intent intent = new Intent(this, ExpenseListActivity.class);
+        startActivity(intent);
+    }
+
     public void add(View v){
         EditText edDate = (EditText)findViewById(R.id.ed_date);
+        DatePicker dPicker = (DatePicker) findViewById(R.id.datePicker);
+        String d2 = new StringBuilder().append(dPicker.getYear()).append("-")
+                .append(dPicker.getMonth()).append("-")
+                .append(dPicker.getDayOfMonth()).toString();
+
         EditText edInfo = (EditText)findViewById(R.id.ed_info);
         EditText edAmount = (EditText)findViewById(R.id.ed_amount);
         String date = edDate.getText().toString();
@@ -27,7 +39,8 @@ public class MainActivity extends Activity {
         int amount = Integer.parseInt(edAmount.getText().toString());
         //INSERT INTO expense(cdate, ctext, amount) VALUES('aaa', 'bbb', 123)
         ContentValues values = new ContentValues();
-        values.put("cdate", date);
+//        values.put("cdate", date);
+        values.put("cdate", d2);
         values.put("ctext", info);
         values.put("amount", amount);
         long id = dbHelper.getWritableDatabase().insert("expense", null, values);
