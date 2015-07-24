@@ -20,10 +20,6 @@ public class MainActivity extends Activity {
         dbHelper = new DBHelper(this, "expense.db", null, 1);
     }
 
-    public void list(View v){
-        Intent intent = new Intent(this, ExpenseListActivity.class);
-        startActivity(intent);
-    }
 
     public void add(View v){
         EditText edDate = (EditText)findViewById(R.id.ed_date);
@@ -59,10 +55,13 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id){
+            case R.id.action_settings:
+                break;
+            case R.id.action_expense_list:
+                Intent intent = new Intent(this, ExpenseListActivity.class);
+                startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
